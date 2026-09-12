@@ -45,6 +45,43 @@ My repositories span **LLM architecture experiments, Turkish tokenization, machi
 ---
 
 <div align="center">
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=55&color=0:0f172a,50:0c4a6e,100:312e81&text=MODEL%20TRAINING%20RESULTS&fontColor=ffffff&fontSize=22&fontAlignY=55" alt="Model Training Results" />
+</div>
+
+## 🧪 Public Model Training Results
+
+I keep a separate public archive for model-training experiments so the result is not just “a model was trained”, but **which model, which data, which hardware, which budget, and what actually happened**.
+
+<div align="center">
+
+<a href="https://github.com/cebrailbagatarhan/model-training-results">
+  <img src="https://img.shields.io/badge/OPEN_MODEL_TRAINING_RESULTS-2563EB?style=for-the-badge&logo=github&logoColor=white" alt="Open model training results repository" />
+</a>
+
+<br/><br/>
+
+<img width="100%" src="https://raw.githubusercontent.com/cebrailbagatarhan/model-training-results/main/assets/model-results-overview.svg" alt="Visual overview of model training experiments" />
+
+</div>
+
+### What did we find?
+
+| Experiment | What happened? |
+|---|---|
+| **Bigg 50M — JEPA off vs legacy** | Under the same 600-second budget, JEPA-off reached **8,584.66 tok/s** vs 6,607.76 and **272.56 test PPL** vs 342.90. In this pilot, JEPA-off was faster and produced ~**20.5% lower test perplexity**. |
+| **Turkish Qwen2.5-7B QLoRA** | 200-step Turkish SFT run completed; average training loss ~**0.9459**. No held-out evaluation yet, so it is recorded as training-complete rather than a quality claim. |
+| **Turkmodel 6.08B** | 400-step H100 proof-of-concept processed **13.1M tokens** with final training loss **4.78736**. Useful as an infrastructure PoC, not as a finished 6B-quality model. |
+| **ModernLLM-Large 1.129B** | Model artifacts and H100 pretrain/SFT/CoT attempts exist, but runs are partial; no clean final benchmark is claimed. |
+
+The archive also tracks **Ouroboros-Mini, nanochat Windows CPU, Car Evaluation ML and the Turkish 128k BPE tokenizer**, with explicit labels for completed, partial, experimental and self-reported results.
+
+**Main takeaway so far:** the strongest controlled LLM result in the archive is the Bigg 50M pilot, where the simpler JEPA-off setup beat the legacy JEPA auxiliary setup under equal wall-clock. Future Bigg architecture experiments will be compared against the current **NLL 5.607873 / PPL 272.563981** baseline.
+
+> Model/checkpoint binaries are not duplicated into the results repo. The archive keeps results, methodology and links back to the original GitHub / Drive / Colab sources.
+
+---
+
+<div align="center">
 <img width="100%" src="https://capsule-render.vercel.app/api?type=rect&height=55&color=0:111827,50:312e81,100:581c87&text=TECH%20STACK&fontColor=ffffff&fontSize=22&fontAlignY=55" alt="Tech Stack" />
 </div>
 
@@ -79,6 +116,15 @@ My repositories span **LLM architecture experiments, Turkish tokenization, machi
 <tr>
 <td width="50%" valign="top">
 
+### 📊 [model-training-results](https://github.com/cebrailbagatarhan/model-training-results)
+
+Public archive of **LLM/ML experiments, metrics, methodology and original source links**.
+
+`LLM` `Benchmarks` `Experiments` `Reproducibility`
+
+</td>
+<td width="50%" valign="top">
+
 ### 🇹🇷 [TurkishTokenizer](https://github.com/cebrailbagatarhan/TurkishTokenizer)
 
 A **128k-vocabulary Byte-Level BPE tokenizer** trained for Turkish text.
@@ -86,6 +132,8 @@ A **128k-vocabulary Byte-Level BPE tokenizer** trained for Turkish text.
 `Python` `Tokenizers` `NLP` `BPE`
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🧠 [yapay-zeka-sistemi](https://github.com/cebrailbagatarhan/yapay-zeka-sistemi)
@@ -95,8 +143,6 @@ Experiments around **decoder-only LLM architecture, PyTorch training and Qwen fi
 `Python` `PyTorch` `LLM` `Qwen`
 
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 
 ### 📈 [FinApp](https://github.com/cebrailbagatarhan/FinApp)
@@ -106,6 +152,8 @@ Financial analytics application for **market data, inflation comparison and tech
 `Python` `Streamlit` `SQLite` `Data`
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🚗 [car-evaluation-ml](https://github.com/cebrailbagatarhan/car-evaluation-ml)
@@ -115,8 +163,6 @@ Machine-learning project comparing **seven classification algorithms** for car a
 `scikit-learn` `Flask` `Plotly` `ML`
 
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 
 ### ✈️ [web-flight-simulator](https://github.com/cebrailbagatarhan/web-flight-simulator)
@@ -126,6 +172,8 @@ Browser-based flight simulator adaptation with **geospatial, telemetry and confi
 `JavaScript` `Three.js` `CesiumJS` `Vite`
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🎬 [video-upscaler](https://github.com/cebrailbagatarhan/video-upscaler)
@@ -135,8 +183,6 @@ Android-oriented **video and photo upscaling** project with local media processi
 `Android` `FFmpeg` `Media Processing`
 
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 
 ### 🖥️ [nanochat-windows-cpu](https://github.com/cebrailbagatarhan/nanochat-windows-cpu)
@@ -146,6 +192,8 @@ Windows CPU-focused adaptation and experiments around **nanochat and local LLM t
 `Python` `PyTorch` `CPU` `LLM`
 
 </td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🔭 More Projects
@@ -153,6 +201,15 @@ Windows CPU-focused adaptation and experiments around **nanochat and local LLM t
 Explore the rest of my repositories for experiments in software, AI, data and web development.
 
 [**→ Browse repositories**](https://github.com/cebrailbagatarhan?tab=repositories)
+
+</td>
+<td width="50%" valign="top">
+
+### 🧾 [Experiment Index](https://github.com/cebrailbagatarhan/model-training-results/blob/main/EXPERIMENT_INDEX.md)
+
+A quick index of what is **completed, partial, pending or experimental** across model runs.
+
+`Results` `Status` `Sources` `Metrics`
 
 </td>
 </tr>
