@@ -117,7 +117,7 @@ let browser;
     await page.setViewportSize({ width: 1360, height: 1050 });
     await page.goto(url);
     const desktop = await page.screenshot({ path: path.join(output, "desktop.jpg"), type: "jpeg", quality: 70 });
-    await page.screenshot({ path: path.join(output, "full-page.jpg"), type: "jpeg", quality: 65, fullPage: true });
+    const fullPage = await page.screenshot({ path: path.join(output, "full-page.jpg"), type: "jpeg", quality: 65, fullPage: true });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(url);
     const mobile = await page.screenshot({ path: path.join(output, "mobile.jpg"), type: "jpeg", quality: 75 });
@@ -135,6 +135,7 @@ let browser;
     await fs.writeFile(path.join(output, "report.json"), JSON.stringify({ checks, browserErrors: errors }, null, 2));
     console.log("PORTFOLIO_DESKTOP_JPEG=" + desktop.toString("base64"));
     console.log("PORTFOLIO_MOBILE_JPEG=" + mobile.toString("base64"));
+    console.log("PORTFOLIO_FULL_JPEG=" + fullPage.toString("base64"));
     console.log("All " + checks.length + " portfolio checks passed.");
     await context.close();
   } finally {
