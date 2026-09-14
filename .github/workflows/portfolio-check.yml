@@ -1,0 +1,52 @@
+name: Portfolio browser checks
+
+on:
+  pull_request:
+    paths:
+      - "docs/**"
+      - "scripts/check-portfolio.cjs"
+      - ".github/workflows/portfolio-check.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**"
+      - "scripts/check-portfolio.cjs"
+      - ".github/workflows/portfolio-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Install browser test tools
+        run: npm install --prefix "$RUNNER_TEMP/portfolio-check" --no-save --package-lock=false playwright@1.63.0
+      - name: Install Chromium
+        run: '"$RUNNER_TEMP/portfolio-check/node_modules/.bin/playwright" install --with-deps chromium'
+      - name: Verify portfolio in Chromium
+        env:
+          PORTFOLIO_PLAYWRIGHT_PATH: ${{ runner.temp }}/portfolio-check/node_modules/playwright
+        run: node scripts/check-portfolio.cjs
+      - name: Save screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: portfolio-browser-check
+          path: portfolio-check/
+          if-no-files-found: ignore
+          retention-days: 7
