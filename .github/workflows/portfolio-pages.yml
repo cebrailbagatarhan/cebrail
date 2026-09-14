@@ -1,0 +1,52 @@
+name: Publish portfolio
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**"
+      - ".github/workflows/portfolio-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-pages
+  cancel-in-progress: false
+
+jobs:
+  package:
+    name: Package portfolio
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Verify static entrypoints
+        run: |
+          test -s docs/index.html
+          test -s docs/styles.css
+          test -s docs/app.js
+          node --check docs/app.js
+      - name: Upload portfolio
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+  deploy:
+    name: Deploy portfolio
+    needs: package
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
