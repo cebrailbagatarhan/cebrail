@@ -27,7 +27,7 @@ Site dosyaları `docs/` klasöründe. HTML, CSS ve JavaScript ile çalışır; �
 
 </details>
 
-[Site dosyalarını ZIP olarak indir](https://github.com/cebrailbagatarhan/cebrail/archive/refs/heads/codex/portfolio-site.zip)
+[Site dosyalarını ZIP olarak indir](https://github.com/cebrailbagatarhan/cebrail/archive/refs/heads/main.zip)
 
 ## Tarayıcıda açmak
 
@@ -35,15 +35,15 @@ Site dosyaları `docs/` klasöründe. HTML, CSS ve JavaScript ile çalışır; �
 
 ## GitHub Pages ile yayın
 
-Bu repo için Pages henüz açık değildi. Yayın ayarını değiştirmek için bağlı GitHub aracında bir işlem bulunmuyor.
+**[Canlı portföyü aç](https://cebrailbagatarhan.github.io/cebrail/)**
 
-1. Portföy değişikliğini `main` dalına birleştir.
-2. [Settings → Pages](https://github.com/cebrailbagatarhan/cebrail/settings/pages) bölümünü aç.
-3. Source: **Deploy from a branch**, branch: **main**, folder: **/docs** seçip kaydet.
+Portföy, `.github/workflows/portfolio-pages.yml` iş akışıyla GitHub Pages'e gönderilir. `main` dalındaki `docs/` dosyaları değiştiğinde yayın otomatik başlar; Actions ekranındaki **Publish portfolio** akışından elle de çalıştırılabilir.
 
-GitHub dağıtımı başarıyla tamamlandığında beklenen adres: **https://cebrailbagatarhan.github.io/cebrail/**. Bu adres, dağıtım tamamlanana kadar canlı site olarak kabul edilmemeli. Özel alan adı gerekli değildir.
+İş akışı yalnızca `docs/` içindeki site dosyalarını paketler. GitHub'ın resmî Pages adımları mevcut yayın izinlerini ve kaynak dalı kurallarını uygular.
 
-[GitHub'ın resmi yayın ayarı dokümanı](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
+Yayının durumunu [GitHub Actions](https://github.com/cebrailbagatarhan/cebrail/actions/workflows/portfolio-pages.yml) ekranından takip edebilirsin. Yeni sürüm, **Deploy portfolio** adımı başarılı olduğunda yayındadır.
+
+[GitHub'ın resmî yayın dokümanı](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 
 ## İçeriği düzenlemek
 
