@@ -8,7 +8,28 @@ Site dosyaları `docs/` klasöründe. HTML, CSS ve JavaScript ile çalışır; �
 - Mobil menü, klavye desteği ve azaltılmış hareket tercihi
 - JavaScript kapalıyken de erişilebilir içerik ve kaynak bağlantıları
 
-## Önizleme
+
+## Tasarım önizlemesi
+
+![Portföyün masaüstü görünümü](preview/portfolio-desktop.jpg)
+
+<details>
+<summary>Mobil görünümü aç</summary>
+
+<img src="preview/portfolio-mobile.jpg" width="390" alt="Portföyün mobil görünümü" />
+
+</details>
+
+<details>
+<summary>Tüm sayfayı gör</summary>
+
+![Portföyün tüm sayfa görünümü](preview/portfolio-full.jpg)
+
+</details>
+
+[Site dosyalarını ZIP olarak indir](https://github.com/cebrailbagatarhan/cebrail/archive/refs/heads/codex/portfolio-site.zip)
+
+## Tarayıcıda açmak
 
 `docs/index.html` dosyasını tarayıcıda açabilir veya repo kökünde `python -m http.server 8000 --directory docs` çalıştırıp `http://localhost:8000` adresine gidebilirsin.
 
@@ -38,3 +59,5 @@ Yeni proje eklerken HTML kartını ve JavaScript içindeki `projects` kaydını 
 `.github/workflows/portfolio-check.yml`, değişiklik isteklerinde Chromium ile filtreleri, dil kalıcılığını, proje penceresini, metrik geçişlerini, kopyalama işlemini, mobil menüyü ve iki dilde taşma durumunu kontrol eder. JavaScript kapalı durumu da ayrıca kontrol edilir. Ekran görüntüleri ve rapor workflow artefaktında saklanır.
 
 Tarayıcı kontrolleri için Playwright **1.63.0** kullanılır; ziyaretçilere gönderilen sitede bağımlılık yoktur.
+
+Son kontrol: Chromium'da 10 kontrol geçti. Türkçe ve İngilizce için 320, 390, 768 ve 1440 px genişlikler doğrulandı. Masaüstü, mobil ve tam sayfa ekran görüntüleri gerçek tarayıcı çıktılarıdır.
