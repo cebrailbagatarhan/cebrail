@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="246" viewBox="0 0 1200 246" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Built around Turkish.</title>
+<desc id="desc">TurkishTokenizer: a trained 128,000-entry Byte-Level BPE vocabulary for Turkish. No benchmark is claimed.</desc>
+<g font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="1200" height="246" rx="20" fill="#112228" /><rect x="1" y="1" width="1198" height="244" rx="19" fill="none" stroke="#2C4C53" stroke-width="2"/><text x="38" y="46" font-size="16" fill="#7CDED7" letter-spacing="2" font-weight="700">02 / TURKISH LANGUAGE TOOLING</text><text x="35" y="107" font-size="49" fill="#EFF8F4" letter-spacing="-1.5" font-weight="700">Built around Turkish.</text><text x="38" y="153" font-size="23" fill="#B3C9CC" >A Byte-Level BPE tokenizer for Turkish text.</text><text x="38" y="205" font-size="16" fill="#7CDED7" letter-spacing="1.5" font-weight="700">PYTHON / TOKENIZERS / NLP</text><rect x="814" y="22" width="364" height="202" rx="14" fill="#1B353C" /><text x="996" y="107" font-size="67" fill="#7CDED7" text-anchor="middle" letter-spacing="-2" font-weight="700">128k</text><text x="996" y="140" font-size="14" fill="#B3C9CC" text-anchor="middle" letter-spacing="2" font-weight="700">VOCABULARY SIZE</text><text x="996" y="176" font-size="15" fill="#EFF8F4" text-anchor="middle" font-weight="700">BYTE-LEVEL BPE</text><text x="996" y="203" font-size="16" fill="#B3C9CC" text-anchor="middle">Trained · no benchmark</text>
+</g>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="362" viewBox="0 0 640 362" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Results, with receipts.</title>
+<desc id="desc">Model Training Results: public experiment archive. Bigg 50M JEPA-off test perplexity 272.56, from a single-seed pilot with a 600-second budget.</desc>
+<g font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="640" height="362" rx="20" fill="#F0F2E8" /><rect x="1" y="1" width="638" height="360" rx="19" fill="none" stroke="#CCD8C4" stroke-width="2"/><text x="32" y="47" font-size="17" fill="#40612E" letter-spacing="1.4" font-weight="700">01 / FEATURED RESEARCH</text><text x="30" y="101" font-size="41" fill="#18291E" letter-spacing="-1.5" font-weight="700">Results, with receipts.</text><text x="32" y="144" font-size="25" fill="#4C614B" >Models, methods, budgets</text><text x="32" y="177" font-size="25" fill="#4C614B" >and honest results.</text><path d="M32 206H608" stroke="#CCD8C4"/><text x="29" y="283" font-size="67" fill="#40612E" letter-spacing="-2" font-weight="700">272.56</text><text x="32" y="323" font-size="17" fill="#4C614B" letter-spacing="1" font-weight="700">TEST PERPLEXITY</text><text x="345" y="257" font-size="17" fill="#18291E" font-weight="700">BIGG 50M / JEPA OFF</text><text x="345" y="293" font-size="18" fill="#4C614B" >600 s · one seed · pilot</text>
+</g>
+</svg>
