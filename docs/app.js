@@ -452,6 +452,131 @@
     } finally { copyButton.disabled = false; }
   });
 
+  /* ---- Visual enhancements (all optional; the page works without them) ---- */
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  // Active navigation link while scrolling.
+  if ("IntersectionObserver" in window) {
+    const navLinks = [...nav.querySelectorAll('a[href^="#"]')];
+    const tracked = navLinks
+      .map((link) => ({ link, section: document.getElementById(link.getAttribute("href").slice(1)) }))
+      .filter((item) => item.section);
+    const visible = new Set();
+    const setActive = () => {
+      const current = tracked.filter((item) => visible.has(item.section)).pop();
+      navLinks.forEach((link) => {
+        if (current && link === current.link) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      });
+    };
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) visible.add(entry.target); else visible.delete(entry.target);
+      });
+      setActive();
+    }, { rootMargin: "-30% 0px -60% 0px" });
+    tracked.forEach((item) => navObserver.observe(item.section));
+
+    // Back-to-top button appears once the hero has scrolled out of view.
+    const toTop = document.querySelector(".to-top");
+    const hero = document.getElementById("top");
+    if (toTop && hero) {
+      new IntersectionObserver((entries) => {
+        toTop.classList.toggle("is-visible", !entries[0].isIntersecting);
+      }, { threshold: 0 }).observe(hero);
+    }
+  }
+
+  // Project cards: mouse-follow spotlight and a very subtle tilt (fine pointers only).
+  if (finePointer.matches) {
+    const maxTilt = 4;
+    cards.forEach((card) => {
+      let frame = 0;
+      let point = null;
+      const paint = () => {
+        frame = 0;
+        if (!point) return;
+        const box = card.getBoundingClientRect();
+        const x = point.x - box.left;
+        const y = point.y - box.top;
+        card.style.setProperty("--mx", x.toFixed(1) + "px");
+        card.style.setProperty("--my", y.toFixed(1) + "px");
+        if (!reducedMotion.matches && box.width && box.height) {
+          card.style.setProperty("--ry", ((x / box.width - 0.5) * 2 * maxTilt).toFixed(2) + "deg");
+          card.style.setProperty("--rx", ((0.5 - y / box.height) * 2 * maxTilt).toFixed(2) + "deg");
+        }
+      };
+      card.addEventListener("pointermove", (event) => {
+        if (event.pointerType && event.pointerType !== "mouse") return;
+        point = { x: event.clientX, y: event.clientY };
+        if (!frame) frame = requestAnimationFrame(paint);
+      });
+      card.addEventListener("pointerleave", () => {
+        point = null;
+        card.style.setProperty("--rx", "0deg");
+        card.style.setProperty("--ry", "0deg");
+      });
+    });
+  }
+
+  // Tech strip marquee: duplicates are aria-hidden clones; static for reduced motion.
+  const strip = document.querySelector(".discipline-strip");
+  const track = strip && strip.querySelector(".discipline-inner");
+  if (track) {
+    const originals = [...track.children];
+    const makeGroup = () => {
+      const group = document.createElement("div");
+      group.className = "marquee-group";
+      return group;
+    };
+    const separator = () => {
+      const mark = document.createElement("i");
+      mark.textContent = "✳";
+      mark.setAttribute("aria-hidden", "true");
+      return mark;
+    };
+    let marqueeTimer = 0;
+    const buildMarquee = () => {
+      track.querySelectorAll(".marquee-group[aria-hidden]").forEach((node) => node.remove());
+      let first = track.querySelector(".marquee-group");
+      if (!first) {
+        first = makeGroup();
+        originals.forEach((node) => first.appendChild(node));
+        first.appendChild(separator());
+        track.appendChild(first);
+      }
+      strip.classList.add("is-marquee");
+      const width = first.getBoundingClientRect().width;
+      if (!width) return;
+      const copies = Math.ceil(window.innerWidth / width) + 1;
+      for (let i = 0; i < copies; i += 1) {
+        const clone = first.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
+      }
+      track.style.setProperty("--marquee-shift", width + "px");
+      track.style.setProperty("--marquee-duration", Math.max(12, width / 45).toFixed(1) + "s");
+    };
+    const teardownMarquee = () => {
+      track.querySelectorAll(".marquee-group[aria-hidden]").forEach((node) => node.remove());
+      const first = track.querySelector(".marquee-group");
+      if (first) {
+        first.querySelector(":scope > i:last-child").remove();
+        originals.forEach((node) => track.appendChild(node));
+        first.remove();
+      }
+      strip.classList.remove("is-marquee");
+    };
+    const syncMarquee = () => { if (reducedMotion.matches) teardownMarquee(); else buildMarquee(); };
+    syncMarquee();
+    reducedMotion.addEventListener("change", syncMarquee);
+    window.addEventListener("resize", () => {
+      clearTimeout(marqueeTimer);
+      marqueeTimer = setTimeout(() => { if (!reducedMotion.matches) buildMarquee(); }, 200);
+    });
+  }
+
   applyLanguage();
   document.getElementById("year").textContent = String(new Date().getFullYear());
   root.classList.add("enhanced");
