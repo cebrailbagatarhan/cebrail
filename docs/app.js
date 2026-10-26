@@ -296,7 +296,11 @@
   const filters = [...document.querySelectorAll("[data-filter]")];
   const metricButtons = [...document.querySelectorAll("[data-metric]")];
   let language = "tr";
-  let activeFilter = "all";
+  const readFilterFromUrl = () => {
+    const requested = new URLSearchParams(window.location.search).get("category");
+    return filters.some((button) => button.dataset.filter === requested) ? requested : "all";
+  };
+  let activeFilter = readFilterFromUrl();
   let metric = "ppl";
   let selectedProject = null;
   let menuOpen = false;
@@ -405,9 +409,18 @@
   desktop.addEventListener("change", (event) => { if (event.matches) setMenu(false); });
 
   filters.forEach((button) => button.addEventListener("click", () => {
+    if (activeFilter === button.dataset.filter) return;
     activeFilter = button.dataset.filter;
+    const url = new URL(window.location.href);
+    if (activeFilter === "all") url.searchParams.delete("category");
+    else url.searchParams.set("category", activeFilter);
+    window.history.pushState(null, "", url);
     filterProjects();
   }));
+  window.addEventListener("popstate", () => {
+    activeFilter = readFilterFromUrl();
+    filterProjects();
+  });
   metricButtons.forEach((button) => button.addEventListener("click", () => {
     metric = button.dataset.metric;
     renderMetric();
