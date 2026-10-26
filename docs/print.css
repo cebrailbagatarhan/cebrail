@@ -1,0 +1,19 @@
+/* Printable project overview: include every project regardless of the on-screen filter. */
+@page { size: A4; margin: 14mm; }
+@media print {
+  html, body { background: #fff !important; color: #111 !important; scroll-behavior: auto !important; }
+  body::before, body::after, html::after, .scroll-progress, .site-header,
+  .hero-art, .discipline-strip, .project-toolbar, .to-top,
+  .detail-button, .dialog-close, #project-dialog { display: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; box-shadow: none !important; text-shadow: none !important; }
+  .container, .section, .hero { width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; }
+  .hero { display: block !important; }
+  .hero-copy { width: 100% !important; max-width: none !important; padding: 0 0 12mm !important; }
+  .project-grid, .project-grid.is-filtered { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 5mm !important; }
+  .project-card, .project-card[hidden] { display: block !important; min-width: 0 !important; break-inside: avoid; page-break-inside: avoid; border: 1px solid #aaa !important; background: #fff !important; color: #111 !important; transform: none !important; }
+  .project-art { display: none !important; }
+  .project-body { padding: 4mm !important; }
+  .project-card *, .hero-copy *, .section-heading * { color: #111 !important; -webkit-text-fill-color: #111 !important; background: none !important; }
+  .section { break-before: auto; margin-top: 8mm !important; }
+  a { color: #111 !important; text-decoration: underline !important; }
+}
