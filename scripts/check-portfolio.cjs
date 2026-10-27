@@ -50,6 +50,22 @@ let browser;
     }
     record("Project categories filter correctly and announce counts");
 
+    await page.goto(url + "/?category=nlp#projects");
+    assert.equal(await page.locator(".project-card:visible").count(), 2);
+    assert.equal(await page.locator('[data-filter="nlp"]').getAttribute("aria-pressed"), "true");
+    await page.locator('[data-filter="apps"]').click();
+    assert.equal(new URL(page.url()).searchParams.get("category"), "apps");
+    assert.equal(await page.locator(".project-card:visible").count(), 4);
+    await page.goBack();
+    await page.waitForFunction(() => document.querySelector('[data-filter="nlp"]').getAttribute("aria-pressed") === "true");
+    assert.equal(await page.locator(".project-card:visible").count(), 2);
+    await page.locator('[data-filter="all"]').click();
+    assert.equal(new URL(page.url()).searchParams.has("category"), false);
+    await page.goto(url + "/?category=unknown");
+    assert.equal(await page.locator(".project-card:visible").count(), 8);
+    await page.goto(url);
+    record("Category URLs open filtered, follow history and reject unknown categories");
+
     const details = page.locator('[data-detail="flight"]');
     await details.click();
     assert.equal(await page.locator("#project-dialog").evaluate(node => node.open), true);
