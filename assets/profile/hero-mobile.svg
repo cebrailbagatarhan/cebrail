@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="560" viewBox="0 0 640 560" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Cebrail Bağatarhan — AI, Turkish NLP and useful software</title>
+<desc id="desc">Personal project showcase. Build, measure and learn. Decorative orbital monogram on a graphite background.</desc>
+<g font-family="Arial, Helvetica, sans-serif">
+<rect x="0" y="0" width="640" height="560" rx="24" fill="#0D1712" /><path d="M0 0V560" stroke="#17251E" stroke-width="1"/><path d="M72 0V560" stroke="#17251E" stroke-width="1"/><path d="M144 0V560" stroke="#17251E" stroke-width="1"/><path d="M216 0V560" stroke="#17251E" stroke-width="1"/><path d="M288 0V560" stroke="#17251E" stroke-width="1"/><path d="M360 0V560" stroke="#17251E" stroke-width="1"/><path d="M432 0V560" stroke="#17251E" stroke-width="1"/><path d="M504 0V560" stroke="#17251E" stroke-width="1"/><path d="M576 0V560" stroke="#17251E" stroke-width="1"/><path d="M648 0V560" stroke="#17251E" stroke-width="1"/><path d="M0 0H640" stroke="#17251E" stroke-width="1"/><path d="M0 72H640" stroke="#17251E" stroke-width="1"/><path d="M0 144H640" stroke="#17251E" stroke-width="1"/><path d="M0 216H640" stroke="#17251E" stroke-width="1"/><path d="M0 288H640" stroke="#17251E" stroke-width="1"/><path d="M0 360H640" stroke="#17251E" stroke-width="1"/><path d="M0 432H640" stroke="#17251E" stroke-width="1"/><path d="M0 504H640" stroke="#17251E" stroke-width="1"/><rect x="0" y="0" width="640" height="560" rx="24" fill="none" stroke="#2E4033" stroke-width="2"/>
+<text x="40" y="53" font-size="17" fill="#C5F277" letter-spacing="3" font-weight="700">CEBRAIL / OPEN LAB</text>
+<text x="36" y="143" font-size="83" fill="#F2F4EB" letter-spacing="-4" font-weight="700">Cebrail</text>
+<text x="36" y="228" font-size="83" fill="#F2F4EB" letter-spacing="-4" font-weight="700">Bağatarhan</text>
+<text x="40" y="284" font-size="27" fill="#BFCABB" >AI experiments. Turkish NLP.</text>
+<text x="40" y="323" font-size="27" fill="#BFCABB" >Ideas into useful software.</text>
+<circle cx="484" cy="445" r="86" stroke="#465B40" stroke-width="1.5" stroke-dasharray="2 10"/>
+<circle cx="484" cy="445" r="61.919999999999995" stroke="#2B4035" stroke-width="1.5" />
+<circle cx="484" cy="445" r="37.84" stroke="#2B4035" stroke-width="1.5" />
+<ellipse cx="484" cy="445" rx="86" ry="31.82" transform="rotate(-35 484 445)" stroke="#769B50" stroke-width="1.5"/>
+<ellipse cx="484" cy="445" rx="86" ry="31.82" transform="rotate(35 484 445)" stroke="#445C39" stroke-width="1.5"/>
+<circle cx="413.5" cy="396.0" r="9" fill="#C5F277"/>
+<circle cx="567.4" cy="423.5" r="6" fill="#7BD8CA"/>
+<circle cx="465.9" cy="529.3" r="6" fill="#7BD8CA"/>
+<text x="484" y="458.76" font-size="46.440000000000005" fill="#C5F277" text-anchor="middle" font-family="monospace" font-weight="700">cb.</text>
+<text x="40" y="401" font-size="18" fill="#C5F277" letter-spacing="1">PYTHON / PYTORCH</text>
+<text x="40" y="438" font-size="18" fill="#BFCABB" letter-spacing="1">BUILD. MEASURE. LEARN.</text>
+<path d="M40 474H282" stroke="#3B503E"/>
+<text x="40" y="512" font-size="17" fill="#A5B6A2" >@cebrailbagatarhan</text>
+
+</g>
+</svg>
