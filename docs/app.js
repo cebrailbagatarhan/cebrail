@@ -435,6 +435,7 @@
         selectedProject = projects.find((p) => p.id === button.dataset.detail);
         if (!selectedProject) return;
         renderProject();
+        document.getElementById("project-copy-status").textContent = "";
         dialog.showModal();
         document.body.classList.add("modal-open");
       });
@@ -463,6 +464,23 @@
         "Kopyalanamadı. Profil adresi: ", "Could not copy. Profile URL: "
       ]) + profileUrl;
     } finally { copyButton.disabled = false; }
+  });
+
+  const projectCopyButton = document.getElementById("copy-project");
+  projectCopyButton.addEventListener("click", async () => {
+    if (!selectedProject) return;
+    const url = profileUrl + "/" + selectedProject.repo;
+    projectCopyButton.disabled = true;
+    try {
+      await navigator.clipboard.writeText(url);
+      document.getElementById("project-copy-status").textContent = pick([
+        "Proje bağlantısı kopyalandı.", "Project link copied."
+      ]);
+    } catch (_) {
+      document.getElementById("project-copy-status").textContent = pick([
+        "Kopyalanamadı. Proje adresi: ", "Could not copy. Project URL: "
+      ]) + url;
+    } finally { projectCopyButton.disabled = false; }
   });
 
   /* ---- Visual enhancements (all optional; the page works without them) ---- */
@@ -596,6 +614,7 @@
   languageButton.hidden = false;
   menuButton.hidden = false;
   copyButton.hidden = false;
+  projectCopyButton.hidden = false;
   document.querySelector(".project-toolbar").hidden = false;
   document.querySelector(".metric-controls").hidden = false;
 })();

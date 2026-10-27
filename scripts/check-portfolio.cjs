@@ -71,10 +71,13 @@ let browser;
     assert.equal(await page.locator("#project-dialog").evaluate(node => node.open), true);
     assert.match(await page.locator("#dialog-evidence").textContent(), /Dimar Tarmizi/);
     assert.equal(await page.locator("#dialog-repo").getAttribute("href"), "https://github.com/cebrailbagatarhan/web-flight-simulator");
+    await page.locator("#copy-project").click();
+    await page.waitForFunction(() => document.getElementById("project-copy-status").textContent.includes("kopyalandı"));
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), "https://github.com/cebrailbagatarhan/web-flight-simulator");
     await page.keyboard.press("Escape");
     assert.equal(await page.locator("#project-dialog").evaluate(node => node.open), false);
     assert.equal(await details.evaluate(node => node === document.activeElement), true);
-    record("Project dialog preserves attribution, links correctly and restores keyboard focus");
+    record("Project dialog attribution, repository link copy and keyboard focus restoration");
 
     await page.locator("#language-toggle").click();
     assert.equal(await page.locator("html").getAttribute("lang"), "en");
