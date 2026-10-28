@@ -293,6 +293,8 @@
   const nav = document.getElementById("site-nav");
   const dialog = document.getElementById("project-dialog");
   const cards = [...document.querySelectorAll(".project-card")];
+  const projectById = new Map(projects.map((project) => [project.id, project]));
+  const searchInput = document.getElementById("project-search");
   const filters = [...document.querySelectorAll("[data-filter]")];
   const metricButtons = [...document.querySelectorAll("[data-metric]")];
   let language = "tr";
@@ -325,14 +327,22 @@
   }
 
   function filterProjects() {
+    const normalize = (text) => text.toLocaleLowerCase(language === "tr" ? "tr-TR" : "en-US");
+    const query = normalize(searchInput.value.trim());
     let count = 0;
     cards.forEach((card) => {
-      const visible = activeFilter === "all" || card.dataset.categories.split(" ").includes(activeFilter);
+      const project = projectById.get(card.dataset.project);
+      const matchesCategory = activeFilter === "all" || card.dataset.categories.split(" ").includes(activeFilter);
+      const searchable = project
+        ? [project.title, project.titleEn || "", project.repo, ...project.tags, pick(project.description)].join(" ")
+        : "";
+      const visible = matchesCategory && (!query || normalize(searchable).includes(query));
       card.hidden = !visible;
       if (visible) count += 1;
     });
     filters.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.filter === activeFilter)));
-    document.querySelector(".project-grid").classList.toggle("is-filtered", activeFilter !== "all");
+    document.querySelector(".project-grid").classList.toggle("is-filtered", activeFilter !== "all" || Boolean(query));
+    document.getElementById("project-empty").hidden = count !== 0;
     document.getElementById("project-count").textContent = language === "tr"
       ? count + " proje gösteriliyor" : count + " projects shown";
   }
@@ -390,6 +400,7 @@
     ]);
     document.getElementById("copy-status").textContent = "";
     setMenu(menuOpen);
+    searchInput.placeholder = pick(["Proje veya teknoloji ara", "Search projects or technologies"]);
     filterProjects();
     renderMetric();
     renderProject();
@@ -408,6 +419,7 @@
   const desktop = window.matchMedia("(min-width: 821px)");
   desktop.addEventListener("change", (event) => { if (event.matches) setMenu(false); });
 
+  searchInput.addEventListener("input", filterProjects);
   filters.forEach((button) => button.addEventListener("click", () => {
     if (activeFilter === button.dataset.filter) return;
     activeFilter = button.dataset.filter;
