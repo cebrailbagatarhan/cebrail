@@ -300,6 +300,10 @@
     const requested = new URLSearchParams(window.location.search).get("category");
     return filters.some((button) => button.dataset.filter === requested) ? requested : "all";
   };
+  const readProjectFromUrl = () => {
+    const requested = new URLSearchParams(window.location.search).get("project");
+    return projects.find((project) => project.id === requested) || null;
+  };
   let activeFilter = readFilterFromUrl();
   let metric = "ppl";
   let selectedProject = null;
@@ -427,23 +431,41 @@
   }));
 
   if (typeof dialog.showModal === "function") {
+    const openProject = (project) => {
+      if (!project) return;
+      selectedProject = project;
+      renderProject();
+      document.getElementById("project-copy-status").textContent = "";
+      if (!dialog.open) dialog.showModal();
+      document.body.classList.add("modal-open");
+    };
+    const syncProjectFromUrl = () => {
+      const project = readProjectFromUrl();
+      if (project) openProject(project);
+      else if (dialog.open) dialog.close();
+    };
     document.querySelectorAll("[data-detail]").forEach((button) => {
       button.hidden = false;
       button.setAttribute("aria-haspopup", "dialog");
       button.setAttribute("aria-controls", "project-dialog");
       button.addEventListener("click", () => {
-        selectedProject = projects.find((p) => p.id === button.dataset.detail);
-        if (!selectedProject) return;
-        renderProject();
-        document.getElementById("project-copy-status").textContent = "";
-        dialog.showModal();
-        document.body.classList.add("modal-open");
+        const project = projects.find((item) => item.id === button.dataset.detail);
+        if (!project) return;
+        const url = new URL(window.location.href);
+        url.searchParams.set("project", project.id);
+        window.history.pushState(null, "", url);
+        openProject(project);
       });
     });
     dialog.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
     dialog.addEventListener("close", () => {
       document.body.classList.remove("modal-open");
       selectedProject = null;
+      const url = new URL(window.location.href);
+      if (url.searchParams.has("project")) {
+        url.searchParams.delete("project");
+        window.history.replaceState(null, "", url);
+      }
     });
     dialog.addEventListener("click", (event) => {
       if (event.target !== dialog) return;
@@ -451,6 +473,8 @@
       if (event.clientX < bounds.left || event.clientX > bounds.right ||
           event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
     });
+    window.addEventListener("popstate", syncProjectFromUrl);
+    syncProjectFromUrl();
   }
 
   const copyButton = document.getElementById("copy-profile");
