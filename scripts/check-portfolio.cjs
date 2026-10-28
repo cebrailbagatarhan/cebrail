@@ -66,6 +66,30 @@ let browser;
     await page.goto(url);
     record("Category URLs open filtered, follow history and reject unknown categories");
 
+    await page.goto(url + "/?category=nlp&project=tokenizer");
+    assert.equal(await page.locator("#project-dialog").evaluate(node => node.open), true);
+    assert.equal(await page.locator("#dialog-repo").getAttribute("href"), "https://github.com/cebrailbagatarhan/TurkishTokenizer");
+    assert.equal(await page.locator(".project-card:visible").count(), 2);
+    await page.locator(".dialog-close").click();
+    await page.waitForFunction(() => !new URLSearchParams(location.search).has("project"));
+    assert.equal(new URL(page.url()).searchParams.get("category"), "nlp");
+
+    await page.goto(url + "/?category=ai");
+    await page.locator('[data-detail="results"]').click();
+    assert.equal(new URL(page.url()).searchParams.get("project"), "results");
+    await page.goBack();
+    await page.waitForFunction(() => !document.getElementById("project-dialog").open);
+    assert.equal(new URL(page.url()).searchParams.has("project"), false);
+    await page.goForward();
+    await page.waitForFunction(() => document.getElementById("project-dialog").open);
+    assert.equal(await page.locator("#dialog-title").textContent(), "Model Training Results");
+    await page.keyboard.press("Escape");
+    await page.waitForFunction(() => !new URLSearchParams(location.search).has("project"));
+    await page.goto(url + "/?project=not-a-real-project");
+    assert.equal(await page.locator("#project-dialog").evaluate(node => node.open), false);
+    await page.goto(url);
+    record("Direct project URLs, category preservation, back/forward and unknown project handling");
+
     const details = page.locator('[data-detail="flight"]');
     await details.click();
     assert.equal(await page.locator("#project-dialog").evaluate(node => node.open), true);
