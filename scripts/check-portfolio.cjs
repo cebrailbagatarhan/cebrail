@@ -50,6 +50,20 @@ let browser;
     }
     record("Project categories filter correctly and announce counts");
 
+    const search = page.locator("#project-search");
+    await search.fill("FFmpeg");
+    assert.equal(await page.locator(".project-card:visible").count(), 1);
+    assert.equal(await page.locator("#project-count").textContent(), "1 proje gösteriliyor");
+    await page.locator('[data-filter="ai"]').click();
+    assert.equal(await page.locator(".project-card:visible").count(), 0);
+    assert.equal(await page.locator("#project-empty").isVisible(), true);
+    await page.locator('[data-filter="all"]').click();
+    assert.equal(await page.locator(".project-card:visible").count(), 1);
+    await search.fill("");
+    assert.equal(await page.locator(".project-card:visible").count(), 8);
+    assert.equal(await page.locator("#project-empty").isVisible(), false);
+    record("Project search matches technology tags, combines with categories and shows an empty state");
+
     await page.goto(url + "/?category=nlp#projects");
     assert.equal(await page.locator(".project-card:visible").count(), 2);
     assert.equal(await page.locator('[data-filter="nlp"]').getAttribute("aria-pressed"), "true");
@@ -83,6 +97,7 @@ let browser;
     assert.equal(await page.locator("html").getAttribute("lang"), "en");
     assert.match(await page.locator("h1").textContent(), /working code/);
     assert.equal(await page.locator("#project-count").textContent(), "8 projects shown");
+    assert.equal(await page.locator("#project-search").getAttribute("placeholder"), "Search projects or technologies");
     await page.reload();
     assert.equal(await page.locator("html").getAttribute("lang"), "en");
     await page.locator('[data-detail="results"]').click();
