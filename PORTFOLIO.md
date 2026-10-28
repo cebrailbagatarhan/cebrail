@@ -65,3 +65,7 @@ Son kontrol: Chromium'da 10 kontrol geçti. Türkçe ve İngilizce için 320, 39
 ## Paylaşılabilir proje filtreleri
 
 Proje kategorisini seçtiğinde adres çubuğuna `?category=ai`, `?category=nlp` veya `?category=apps` eklenir. Bu bağlantıyı paylaşan kişi aynı filtreyi açık görür. **Tümü** filtresi parametreyi kaldırır; tarayıcının geri/ileri tuşları da filtreyi geri yükler. Bilinmeyen kategori adları güvenle **Tümü** olarak değerlendirilir. JavaScript kapalıyken bütün proje kartları erişilebilir kalır.
+
+## Doğrudan proje detay bağlantıları
+
+Bir proje kartındaki **Detay** düğmesi adres çubuğuna `?project=results` gibi bir parametre ekler. Bu bağlantı doğrudan açıldığında proje penceresi görüntülenir; geri/ileri gezinmesiyle pencere durumu eşitlenir. Pencere kapatıldığında `project` parametresi kaldırılır, varsa `category` filtresi korunur. Bilinmeyen proje kimlikleri pencere açmaz. JavaScript kapalıyken proje kartları ve kaynak bağlantıları erişilebilir kalır.
