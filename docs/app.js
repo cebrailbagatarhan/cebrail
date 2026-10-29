@@ -292,6 +292,9 @@
   const menuButton = document.getElementById("menu-toggle");
   const nav = document.getElementById("site-nav");
   const dialog = document.getElementById("project-dialog");
+  const dialogNavigation = dialog.querySelector(".dialog-navigation");
+  const previousProjectButton = document.getElementById("previous-project");
+  const nextProjectButton = document.getElementById("next-project");
   const cards = [...document.querySelectorAll(".project-card")];
   const filters = [...document.querySelectorAll("[data-filter]")];
   const metricButtons = [...document.querySelectorAll("[data-metric]")];
@@ -358,6 +361,19 @@
     metricButtons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.metric === metric)));
   }
 
+  const visibleProjectIds = () => cards.filter((card) => !card.hidden).map((card) => card.dataset.project);
+
+  function navigateProject(direction) {
+    if (!selectedProject) return;
+    const ids = visibleProjectIds();
+    const nextId = ids[ids.indexOf(selectedProject.id) + direction];
+    const next = projects.find((project) => project.id === nextId);
+    if (!next) return;
+    selectedProject = next;
+    document.getElementById("project-copy-status").textContent = "";
+    renderProject();
+  }
+
   function renderProject() {
     if (!selectedProject) return;
     const p = selectedProject;
@@ -367,6 +383,14 @@
       document.getElementById("dialog-" + key).textContent = pick(p[key]);
     }
     document.getElementById("dialog-repo").href = profileUrl + "/" + p.repo;
+    const ids = visibleProjectIds();
+    const position = ids.indexOf(p.id);
+    previousProjectButton.disabled = position <= 0;
+    nextProjectButton.disabled = position < 0 || position >= ids.length - 1;
+    document.getElementById("dialog-position").textContent = pick([
+      (position + 1) + " / " + ids.length + " proje",
+      (position + 1) + " of " + ids.length + " projects"
+    ]);
   }
 
   function applyLanguage() {
@@ -437,8 +461,18 @@
         renderProject();
         document.getElementById("project-copy-status").textContent = "";
         dialog.showModal();
+        dialogNavigation.hidden = false;
         document.body.classList.add("modal-open");
       });
+    });
+    previousProjectButton.addEventListener("click", () => navigateProject(-1));
+    nextProjectButton.addEventListener("click", () => navigateProject(1));
+    dialog.addEventListener("keydown", (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        navigateProject(event.key === "ArrowRight" ? 1 : -1);
+      }
     });
     dialog.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
     dialog.addEventListener("close", () => {
