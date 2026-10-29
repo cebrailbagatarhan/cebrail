@@ -71,7 +71,7 @@ let browser;
     assert.equal(await page.locator("#project-dialog").evaluate(node => node.open), true);
     assert.match(await page.locator("#dialog-evidence").textContent(), /Dimar Tarmizi/);
     assert.equal(await page.locator("#dialog-repo").getAttribute("href"), "https://github.com/cebrailbagatarhan/web-flight-simulator");
-    assert.match(await page.locator("#dialog-position").textContent(), /^\\d+ \\/ 8 proje$/);
+    assert.match(await page.locator("#dialog-position").textContent(), /^\d+ \/ 8 proje$/);
     await page.locator("#next-project").click();
     assert.equal(await page.locator("#dialog-repo").getAttribute("href"), "https://github.com/cebrailbagatarhan/car-evaluation-ml");
     await page.keyboard.press("ArrowLeft");
