@@ -10,7 +10,7 @@
   .hero { display: block !important; }
   .hero-copy { width: 100% !important; max-width: none !important; padding: 0 0 12mm !important; }
   .project-grid, .project-grid.is-filtered { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 5mm !important; }
-  .project-card, .project-card[hidden] { grid-column: auto !important; display: block !important; min-width: 0 !important; break-inside: avoid; page-break-inside: avoid; border: 1px solid #aaa !important; background: #fff !important; color: #111 !important; transform: none !important; }
+  .project-card, .project-card[hidden] { display: block !important; min-width: 0 !important; break-inside: avoid; page-break-inside: avoid; border: 1px solid #aaa !important; background: #fff !important; color: #111 !important; transform: none !important; }
   .project-art { display: none !important; }
   .project-body { padding: 4mm !important; }
   .project-card *, .hero-copy *, .section-heading * { color: #111 !important; -webkit-text-fill-color: #111 !important; background: none !important; }

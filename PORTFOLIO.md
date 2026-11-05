@@ -11,8 +11,6 @@ Site dosyaları `docs/` klasöründe. HTML, CSS ve JavaScript ile çalışır; �
 
 ## Tasarım önizlemesi
 
-Open Lab: koyu mürekkep zemini, sıcak turuncu vektör kapak ve açık kâğıt tonlarında proje galerisi. Büyük tipografi, sakin hareketler ve mobil uyumlu düzen.
-
 ![Portföyün masaüstü görünümü](preview/portfolio-desktop.jpg)
 
 <details>
@@ -62,9 +60,8 @@ Yeni proje eklerken HTML kartını ve JavaScript içindeki `projects` kaydını 
 
 Tarayıcı kontrolleri için Playwright **1.63.0** kullanılır; ziyaretçilere gönderilen sitede bağımlılık yoktur.
 
-Son kontrol: Chromium'da 11 ekran kontrolü ve yazdırma kontrolü geçti. Türkçe ve İngilizce için 320, 390, 768 ve 1440 px genişlikler doğrulandı. Masaüstü, mobil ve tam sayfa ekran görüntüleri gerçek tarayıcı çıktılarıdır.
+Son kontrol: Chromium'da 10 kontrol geçti. Türkçe ve İngilizce için 320, 390, 768 ve 1440 px genişlikler doğrulandı. Masaüstü, mobil ve tam sayfa ekran görüntüleri gerçek tarayıcı çıktılarıdır.
 
 ## Paylaşılabilir proje filtreleri
 
 Proje kategorisini seçtiğinde adres çubuğuna `?category=ai`, `?category=nlp` veya `?category=apps` eklenir. Bu bağlantıyı paylaşan kişi aynı filtreyi açık görür. **Tümü** filtresi parametreyi kaldırır; tarayıcının geri/ileri tuşları da filtreyi geri yükler. Bilinmeyen kategori adları güvenle **Tümü** olarak değerlendirilir. JavaScript kapalıyken bütün proje kartları erişilebilir kalır.
-
